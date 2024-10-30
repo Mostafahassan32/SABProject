@@ -1,0 +1,189 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns:uxap="sap.uxap" xmlns:f="sap.f"
+	xmlns:svm="sap.ui.comp.smartvariants" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core" xmlns:table="sap.m.table"
+	xmlns:layout="sap.ui.layout" xmlns="sap.m" controllerName="SBAProject.controller.View1" displayBlock="true">
+	<f:DynamicPage headerExpanded="{/headerExpanded}">
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true"/>
+					<Title text="طرح المنافسة و استلام العروض"/>
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<fb:FilterBar id="filterbar" persistencyKey="myPerKey" class="go" useToolbar="false" search=".onGo" filterChange=".onFilterChange"
+						afterVariantLoad=".onAfterVariantLoad">
+						<fb:filterGroupItems>
+							<fb:FilterGroupItem name="contract" groupName="group0" label="{i18n>numberr}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="contract" showClearIcon="true" liveChange=".onContract" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="notifi" groupName="group1" label="{i18n>Competition}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="notifi" showClearIcon="true" liveChange=".onNotifi" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="Invoice" groupName="group2" label="{i18n>Transaction1}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="Invoice" showClearIcon="true" liveChange=".onInvoice" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="dateFrom" groupName="groupFrom" label="{i18n>resource}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="Invoice1" showClearIcon="true" liveChange=".onInvoice" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="dateTo" groupName="groupTo" label="{i18n>Datethecompetitionwascreated}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="Invoice2" showClearIcon="true" liveChange=".onInvoice" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="invoicedateFrom" groupName="group4" label="{i18n>Dateavailableforcompetition}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="Invoice3" showClearIcon="true" liveChange=".onInvoice" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+							<fb:FilterGroupItem name="invoicedateTo" groupName="group6" label="{i18n>Industry}" visibleInFilterBar="true">
+								<fb:control>
+									<Input id="Invoice4" showClearIcon="true" liveChange=".onInvoice" showValueHelp="true"/>
+								</fb:control>
+							</fb:FilterGroupItem>
+						</fb:filterGroupItems>
+					</fb:FilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<f:content>
+			<VBox>
+				<Table class="table" width="100%" id="table" items="{odataModel>/}" noDataText="{worklistView>/tableNoDataText}" backgroundDesign="Solid">
+					<headerToolbar>
+						<OverflowToolbar class="margin-top">
+							<content>
+								<Button class="create" icon="sap-icon://create" press="onCreate" tooltip="{i18n>Create}"/>
+								<Button class="sort" icon="sap-icon://sort" press="onOpenSortDialog" tooltip="{i18n>Sort}"/>
+								<Button icon="sap-icon://filter" press="onOpenFilterDialog" tooltip="{i18n>Filter}"/>
+								<Button icon="sap-icon://excel-attachment" press="onExport" tooltip="{i18n>Export}"/>
+							</content>
+						</OverflowToolbar>
+					</headerToolbar>
+					<columns>
+						<Column id="NOTIFICATIONNOC" hAlign="Center" class="first">
+							<Text text="{i18n>numberr}" id="NOTIFICATIONNO"/>
+						</Column>
+						<Column id="DATEC" hAlign="Center">
+							<Text text="{i18n>Competition}" id="DATE"/>
+						</Column>
+						<Column id="TIMEC" hAlign="Center">
+							<Text text="{i18n>resource}" id="TIME"/>
+						</Column>
+						<Column id="INVOICENUMBERC" hAlign="Center">
+							<Text text="{i18n>Competitiontitle}" id="INVOICENUMBER"/>
+						</Column>
+						<Column id="CONTRACTNUMBERC" hAlign="Center">
+							<Text text="{i18n>Industry}" id="CONTRACTNUMBER"/>
+						</Column>
+						<Column id="CONTRACTITEMC" hAlign="Center">
+							<Text text="{i18n>Notificationletternumber}" id="CONTRACTITEM"/>
+						</Column>
+						<Column id="LINEITEMC" hAlign="Center">
+							<Text text="{i18n>Outgoingtransactionnumber}" id="LINEITEM"/>
+						</Column>
+						<Column id="LINEITEMDESCC" hAlign="Center">
+							<Text text="{i18n>Studentadministration}" id="LINEITEMDESC"/>
+						</Column>
+						<Column id="FUELQUANTITYC" hAlign="Center">
+							<Text text="{i18n>Availabilitydate}" id="FUELQUANTITY"/>
+						</Column>
+						<Column id="FILLINGDATEC" hAlign="Center">
+							<Text text="{i18n>Offeringdate}" id="FILLINGDATE"/>
+						</Column>
+						<Column id="FillingTimeC" hAlign="Center" class="last">
+							<Text text="{i18n>Creationdate}" id="FILLINGTIME"/>
+						</Column>
+						<Column id="FillingTime" hAlign="Center" class="last">
+							<Text text="{i18n>Createdby}" id="FILLINGTIME1"/>
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem vAlign="Middle">
+							<cells>
+								<Text id="NOTIFICATIONNOTEXT" text="{odataModel>NotificationNo}"/>
+								<!-- <Text id="DATETEXT" text="{path: 'odataModel>Date' , type: 'sap.ui.model.type.DateTime', formatOptions: { style: 'short', UTC: true }}" /> -->
+								<Text id="DATETEXT" text="{path: 'odataModel>Date',type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd'}}"/>
+								<Text id="TIMETEXT" text="{path: 'odataModel>Time/ms' , formatter: '.formateEdmTime'}"/>
+								<!-- <Text id="TIMETEXT" text="{path: 'odataModel>Time/ms' , type: 'sap.ui.model.type.Integer', formatOptions: { style: 'long'}, formatter: 'projectsec.formatter.TimeFormatter.format'} }"/> -->
+								<Text id="INVOICENUMBERTEXT" text="{odataModel>InvoiceNumber}"/>
+								<!-- <Text id="INVOICEDATETEXT" text="{path: 'odataModel>InvoiceDate',type: 'sap.ui.model.type.Date'}"/> -->
+								<Text id="INVOICEDATETEXT" text="{path: 'odataModel>InvoiceDate',type: 'sap.ui.model.type.Date', formatOptions: { pattern:'yyyy-MM-dd'}}"/>
+								<Text id="CONTRACTNUMBERTEXT" text="{odataModel>ContractNumber}"/>
+								<Text id="CONTRACTITEMTEXTs" text="{odataModel>ContractItem}"/>
+								<Text id="LINEITEMTEXT" text="{odataModel>LineItem}"/>
+								<Text id="LINEITEMDESCTEXT" text="{odataModel>LineItemDesc}"/>
+								<Text id="FUELQUANTITYTEXT" text="{odataModel>FuelQuantity}"/>
+								<Text id="FILLINGDATETEXT" text="{path: 'odataModel>FillingDate',type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'yyyy-MM-dd'}}"/>
+								<Text id="FillingTimeTEXT" text="{path: 'odataModel>FillingTime/ms' , formatter: '.formateEdmTime'}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+				<Dialog id="sortDialog" title="{i18n>SortOptions}" class="sortDialog">
+					<VBox id="sortOptionsContainer">
+						<HBox>
+							<Select id="columnSelect" width="auto">
+								<items>
+									<core:Item key="ContractNumber" text="{i18n>ContractNumber}"/>
+									<core:Item key="ContractItem" text="{i18n>ContractItem}"/>
+									<core:Item key="NotificationNo" text="{i18n>NotificationNumber}"/>
+									<core:Item key="InvoiceNumber" text="{i18n>InvoiceNumber}"/>
+									<core:Item key="Date" text="{i18n>Date}"/>
+									<core:Item key="Time" text="{i18n>Time}"/>
+									<core:Item key="InvoiceDate" text="{i18n>InvoiceDate}"/>
+									<core:Item key="ServiceItem" text="{i18n>ServiceItem}"/>
+									<core:Item key="ServiceItemDesc" text="{i18n>ServiceItemDesc}"/>
+									<core:Item key="FuelQuantity" text="{i18n>FuelQuantity}"/>
+									<core:Item key="FillingDate" text="{i18n>FillingDate}"/>
+									<core:Item key="FillingTime" text="{i18n>FillingTime}"/>
+								</items>
+							</Select>
+							<RadioButtonGroup id="sortOrderGroup" columns="10">
+								<buttons>
+									<RadioButton text="{i18n>Ascending}" selected="true"/>
+									<RadioButton text="{i18n>Descending}"/>
+								</buttons>
+							</RadioButtonGroup>
+						</HBox>
+					</VBox>
+					<beginButton>
+						<Button text="{i18n>Sort}" press="onSort"/>
+					</beginButton>
+					<endButton>
+						<Button text="{i18n>Cancel}" press="onCloseSortDialog"/>
+					</endButton>
+				</Dialog>
+				<Dialog id="filterDialog" title="{i18n>Filter}" class="sapUiResponsivePadding filterDialog">
+					<HBox>
+						<Select id="filterColumnSelect">
+							<core:Item key="ContractNumber" text="{i18n>ContractNumber}"/>
+							<core:Item key="ContractItem" text="{i18n>ContractItem}"/>
+							<core:Item key="NotificationNo" text="{i18n>NotificationNumber}"/>
+							<core:Item key="InvoiceNumber" text="{i18n>InvoiceNumber}"/>
+							<core:Item key="ServiceItem" text="{i18n>ServiceItem}"/>
+							<core:Item key="ServiceItemDesc" text="{i18n>ServiceItemDesc}"/>
+							<core:Item key="FuelQuantity" text="{i18n>FuelQuantity}"/>
+						</Select>
+						<Input id="filterValueInput" placeholder="{i18n>EnterValue}" width="auto"/>
+					</HBox>
+					<beginButton>
+						<Button text="{i18n>Filter}" press="onFilterDialogConfirm"/>
+					</beginButton>
+					<endButton>
+						<Button text="{i18n>Cancel}" press="onCloseFilterDialog"/>
+					</endButton>
+				</Dialog>
+			</VBox>
+		</f:content>
+	</f:DynamicPage>
+</mvc:View>
